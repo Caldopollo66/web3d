@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  </head>
+
+  <body>
+    <a-scene cursor="rayOrigin: mouse">
+
+      <a-assets>
+        <img id="cj" src="assets/cj.jpg">
+        <img id="windows" src="assets/windows.jpg">
+      </a-assets>
+
+      <a-sky src="#windows"></a-sky>
+
+      <script>
+        const scene = document.querySelector("a-scene");
+
+        // Crear 100 esferas
+        for (let i = 0; i < 100; i++) {
+          const sphere = document.createElement("a-sphere");
+
+          const x = (Math.random() * 20) - 10;
+          const y = Math.random() * 5 + 0.5;
+          const z = (Math.random() * -20) - 3;
+
+          sphere.setAttribute("position", `${x} ${y} ${z}`);
+          sphere.setAttribute("radius", "0.5");
+          sphere.setAttribute("material", "src: #cj");
+
+          // 👇 Movimiento individual al click
+          sphere.addEventListener("click", () => {
+            const nx = x + (Math.random() * 4 - 2);
+            const ny = y + (Math.random() * 3 + 1);
+            const nz = z + (Math.random() * -4);
+
+            sphere.setAttribute("animation", {
+              property: "position",
+              to: `${nx} ${ny} ${nz}`,
+              dur: 2000,
+              easing: "easeOutQuad"
+            });
+          });
+
+          scene.appendChild(sphere);
+        }
+      </script>
+
+    </a-scene>
+  </body>
+</html>

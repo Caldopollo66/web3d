@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script>
+        AFRAME.registerComponent("mylink", {
+        init: function() {  
+         this.el.addEventListener("click", (e) => {              
+            window.location = this.data.href;      
+           })
+        }
+      })
+    </script>
+
+
+  </head>
+  <body>
+  <a-scene cursor="rayOrigin: mouse">
+    <a-assets>
+      <img id="imgSortida" src="assets/entragroc.jpeg" >
+      <img id="imgCasa" src="assets/casa.jpg" >
+      <a-asset-item id="dracula" src="assets/dracula/scene.gltf"></a-asset-item>
+    </a-assets>
+   
+ 
+    <!-- fuseTimeout = el temps que triga en fer click des de que es posiciona sobre un objecte-->
+     <a-entity cursor="fuse: true; fuseTimeout: 2000"
+           position="0 0 -1"
+           geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+           material="color: red; shader: flat"
+           animation="property: components.material.material.color;
+                 type: color;
+                 to: white;
+                 dur: 1000;
+                 dir: alternate;
+                 loop: true">
+    </a-entity>
+      <a-sky src="#imgCasa"></a-sky>
+       </a-sphere> 
+      <a-entity gltf-model="#dracula" position="0 -90 0" scale="0.02 0.02 0.02" rotation="0 90 0"
+                animation="property: position; dur: 10000; from: -100 -3 21; to: 0 0 0; dir: alternate; loop: true">        
+      </a-entity>
+      <a-plane position="200 10 -40" src="#imgSortida" scale="22 22 22" rotation="0 280 0" transparent="true" mylink="href: https://caldopollo66.github.io/web3d/;" transparent="true"></a-plane>
+    </a-scene>
+  </body>
+</html>
